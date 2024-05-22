@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-moondream"
+description = "Moondream image to text query node with batch support"
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["accelerate==0.25.0", "huggingface-hub>=0.20.1", "Pillow>=10.1.0", "timm==0.9.12", "einops"]
+
+[project.urls]
+Repository = "https://github.com/kijai/ComfyUI-moondream"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-moondream"
+Icon = ""
