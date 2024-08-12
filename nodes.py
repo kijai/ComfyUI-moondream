@@ -44,7 +44,7 @@ class MoondreamQuery:
         device = comfy.model_management.get_torch_device()
         dtype = torch.float16 if comfy.model_management.should_use_fp16() and not comfy.model_management.is_device_mps(device) else torch.float32
         
-        checkpoint_path = os.path.join(script_directory, f"checkpoints/{model}")
+        checkpoint_path = os.path.join(script_directory, "checkpoints", model)
 
         if not hasattr(self, "moondream") or self.moondream is None or self.selected_model != model:
             self.selected_model = model
@@ -59,7 +59,7 @@ class MoondreamQuery:
                     raise FileNotFoundError("No model found.")
 
             self.tokenizer = AutoTokenizer.from_pretrained(checkpoint_path)
-            self.moondream = Moondream.from_pretrained(checkpoint_path).to(device=device, dtype=dtype)
+            self.moondream = Moondream.from_pretrained(checkpoint_path, ignore_mismatched_sizes=True).to(device=device, dtype=dtype)
             self.moondream.eval()
 
         answer_dict = {}
